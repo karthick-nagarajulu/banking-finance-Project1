@@ -8,13 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
-            steps {
-                git branch: 'master',
-                    url: 'https://github.com/karthick-nagarajulu/banking-finance-Project1.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 echo "Building application"

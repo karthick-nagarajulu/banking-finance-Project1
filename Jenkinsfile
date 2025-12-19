@@ -10,7 +10,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main',
+                git branch: 'master',
                     url: 'https://github.com/karthick-nagarajulu/banking-finance-Project1.git'
             }
         }

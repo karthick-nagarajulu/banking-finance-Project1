@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        ANSIBLE_DIR = "/home/banking/ansible"
+        ANSIBLE_DIR = "/opt/ansible"
         INVENTORY   = "inventory/hosts"
     }
 

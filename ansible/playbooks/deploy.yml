@@ -10,7 +10,7 @@
 
     - name: Copy JAR to PROD
       copy:
-        src: /var/lib/jenkins/workspace/{{ lookup('env','JOB_NAME') }}/target/banking-0.0.1-SNAPSHOT.jar
+        src: /var/lib/jenkins/workspace/{{ lookup('env','JOB_NAME') }}/target/banking-1.0.1-SNAPSHOT.jar
         dest: /opt/banking-app/app.jar
 
     - name: Copy Dockerfile to PROD

@@ -2,11 +2,18 @@ pipeline {
     agent any
 
     environment {
-        
+        ANSIBLE_DIR = "${WORKSPACE}/ansible"
         INVENTORY   = "inventory/hosts"
     }
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                echo "Checking out source code"
+                checkout scm
+            }
+        }
 
         stage('Build') {
             steps {
@@ -34,15 +41,15 @@ pipeline {
         }
 
         stage('Deploy to PROD using Ansible') {
-           steps {
-               echo "Deploying application to PROD via Ansible"
-           sh """
-             cd ${ANSIBLE_DIR}
-             ansible-playbook -i ${INVENTORY} playbooks/deploy.yml
-           """
+            steps {
+                echo "Deploying application to PROD via Ansible"
+                sh '''
+                  cd ansible
+                  ansible-playbook -i inventory/hosts playbooks/deploy.yml
+                '''
+            }
+        }
     }
-}
-
 
     post {
         success {

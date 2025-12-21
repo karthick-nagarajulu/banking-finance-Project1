@@ -1,0 +1,30 @@
+- name: Deploy Banking App to PROD
+  hosts: prod
+  become: yes
+
+  tasks:
+    - name: Create app directory
+      file:
+        path: /opt/banking-app
+        state: directory
+
+    - name: Copy JAR to PROD
+      copy:
+        src: /var/lib/jenkins/workspace/{{ lookup('env','JOB_NAME') }}/target/banking-0.0.1-SNAPSHOT.jar
+        dest: /opt/banking-app/app.jar
+
+    - name: Copy Dockerfile to PROD
+      copy:
+        src: /var/lib/jenkins/workspace/{{ lookup('env','JOB_NAME') }}/Dockerfile
+        dest: /opt/banking-app/Dockerfile
+
+    - name: Build Docker image
+      shell: |
+        cd /opt/banking-app
+        docker build -t banking-app:latest .
+
+    - name: Run container
+      shell: |
+        docker rm -f banking-app || true
+        docker run -d --name banking-app -p 8080:8081 banking-app:latest
+

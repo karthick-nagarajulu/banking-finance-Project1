@@ -1,0 +1,6 @@
+[test]
+test-ec2 ansible_connection=local
+
+[prod]
+prod-ec2 ansible_host=10.10.1.82
+ 

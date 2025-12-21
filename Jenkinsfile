@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        
         INVENTORY   = "inventory/hosts"
     }
 

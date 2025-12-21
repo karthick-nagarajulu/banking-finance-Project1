@@ -34,15 +34,15 @@ pipeline {
         }
 
         stage('Deploy to PROD using Ansible') {
-            steps {
-                echo "Deploying application to PROD via Ansible"
-                sh """
-                  cd ${ANSIBLE_DIR}
-                  ansible-playbook -i ${INVENTORY} playbooks/deploy.yml
-                """
-            }
-        }
+           steps {
+               echo "Deploying application to PROD via Ansible"
+           sh """
+             cd ${ANSIBLE_DIR}
+             ansible-playbook -i ${INVENTORY} playbooks/deploy.yml
+           """
     }
+}
+
 
     post {
         success {
